@@ -13,34 +13,54 @@ TreatmentRoom::TreatmentRoom()
 
 void TreatmentRoom::InitNodelist()
 {
-	std::ifstream infile("res/nodelists/TreatmentRoomNodelist.txt");
-
+	std::ifstream infile;
 	std::string line;
-	int i = 0;
+	int i;
+
+	infile.open("res/nodelists/TreatmentRoomNodelist.txt");
+	i = 0;
 	while (std::getline(infile, line))
 	{
 		std::istringstream iss(line);
-		float nodeX,nodeY,nextRightX,nextRightY,nextLeftX,nextLeftY,nextUpX,nextUpY,nextDownX,nextDownY;
-		int layer;
-		if ((iss >> nodeX >> nodeY >> layer >> nextRightX >> nextRightY >> nextLeftX >> nextLeftY >> nextUpX >> nextUpY >> nextDownX >>nextDownY))
+		float nodeX,nodeY;
+		int index, layer, nextRight, nextLeft, nextUp, nextDown;
+		if ((iss >> index >> nodeX >> nodeY >> layer >> nextRight >> nextLeft >> nextUp >> nextDown ))
 		{
 			TreatmentRoomNodelist[i] = new Nodelist;
+			TreatmentRoomNodelist[i]->index = index;
 			TreatmentRoomNodelist[i]->node.X = nodeX;
 			TreatmentRoomNodelist[i]->node.Y = nodeY;
 			TreatmentRoomNodelist[i]->layer = layer;
-			TreatmentRoomNodelist[i]->nextRight.X = nextRightX;
-			TreatmentRoomNodelist[i]->nextRight.Y = nextRightY;
-			TreatmentRoomNodelist[i]->nextLeft.X = nextLeftX;
-			TreatmentRoomNodelist[i]->nextLeft.Y = nextLeftY;
-			TreatmentRoomNodelist[i]->nextUp.X = nextUpX;
-			TreatmentRoomNodelist[i]->nextUp.Y = nextUpY;
-			TreatmentRoomNodelist[i]->nextDown.X = nextDownX;
-			TreatmentRoomNodelist[i]->nextDown.Y = nextDownY;
-
 			i++;
 		}
 		m_actualNodelists = i-1;
 	}
+	infile.close();
+
+	infile.open("res/nodelists/TreatmentRoomNodelist.txt");
+	i = 0;
+	while (std::getline(infile, line))
+	{
+		std::istringstream iss(line);
+		float nodeX,nodeY;
+		int index, layer, nextRight, nextLeft, nextUp, nextDown;
+		if ((iss >> index >> nodeX >> nodeY >> layer >> nextRight >> nextLeft >> nextUp >> nextDown ))
+		{
+			for(int j=0;j<=m_actualNodelists;j++)
+			{
+				if(TreatmentRoomNodelist[j]->index==nextRight)
+					TreatmentRoomNodelist[i]->nextRight = TreatmentRoomNodelist[j]->node;
+				if(TreatmentRoomNodelist[j]->index==nextLeft)
+					TreatmentRoomNodelist[i]->nextLeft = TreatmentRoomNodelist[j]->node;
+				if(TreatmentRoomNodelist[j]->index==nextUp)
+					TreatmentRoomNodelist[i]->nextUp = TreatmentRoomNodelist[j]->node;
+				if(TreatmentRoomNodelist[j]->index==nextDown)
+					TreatmentRoomNodelist[i]->nextDown = TreatmentRoomNodelist[j]->node;
+			}
+			i++;
+		}
+	}
+	infile.close();
 }
 
 Vector2 TreatmentRoom::getNextNodeRight(Vector2 position)

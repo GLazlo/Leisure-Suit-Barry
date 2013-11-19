@@ -13,6 +13,7 @@ protected:
 	virtual int getMyLayer(Vector2) = 0;
 	typedef struct Nodelist
 	{
+		int index;
 		Vector2 node;
 		int layer;
 		Vector2 nextRight;
