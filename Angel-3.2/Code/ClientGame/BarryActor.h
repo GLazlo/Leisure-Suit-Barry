@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "TreatmentRoom.h"
+#include "defineInit.h"
 
 class BarryActor
 {

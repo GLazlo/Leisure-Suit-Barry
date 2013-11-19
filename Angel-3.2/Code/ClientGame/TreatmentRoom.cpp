@@ -67,7 +67,7 @@ int TreatmentRoom::getMyNode(Vector2 position)
 		if(position.X==TreatmentRoomNodelist[i]->node.X && position.Y==TreatmentRoomNodelist[i]->node.Y)
 			return i;
 	}
-	return 0;
+	return NO_NODE;
 }
 
 int TreatmentRoom::getMyLayer(Vector2 position)
