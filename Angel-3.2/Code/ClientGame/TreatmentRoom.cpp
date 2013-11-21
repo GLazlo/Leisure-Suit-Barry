@@ -90,8 +90,8 @@ int TreatmentRoom::getMyNode(Vector2 position)
 	return NO_NODE;
 }
 
-int TreatmentRoom::getMyLayer(Vector2 position)
+int TreatmentRoom::getMyLayer(Vector2 nextNode)
 {
-	return TreatmentRoomNodelist[getMyNode(position)]->layer;
+	return TreatmentRoomNodelist[getMyNode(nextNode)]->layer;
 }
 
