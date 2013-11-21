@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "BarryActor.h"
 
+#include <math.h>
 
 
 
@@ -11,8 +12,8 @@ BarryActor::BarryActor()
 	theWorld.Add(m_Actor);
 
 	m_Actor->SetColor(1,1,1,1);
-	m_Actor->SetSize(7.15f, 11.7f);
-	m_Actor->SetPosition(5.0f,5.0f);
+	m_Actor->SetSize(4.766666f, 7.8f);
+	m_Actor->SetPosition(-8.515f,-4.687f);
 
 	m_Actor->LoadSpriteFrames("barryWalkRight_001.png");
 	m_Actor->SetSpriteFrame(0);
@@ -25,12 +26,13 @@ BarryActor::BarryActor()
 void BarryActor::MoveRight()
 {
 	m_position = m_Actor->GetPosition();
-	if(roomTest->getMyNode(m_position)!=NO_NODE)
+	m_myNode = roomTest->getMyNode(m_position);
+	if(m_myNode!=NO_NODE)
 	{
 		ScaleBarry(roomTest->getMyLayer(m_position));
 
 		m_goTo = roomTest->getNextNodeRight(m_position);
-		m_Actor->MoveTo(m_goTo, 3.0f, true);
+		m_Actor->MoveTo(m_goTo, CalcWalkTime(), true);
 
 		m_Actor->LoadSpriteFrames("res/barryWalk/barryWalkRight_001.png");
 		m_Actor->PlaySpriteAnimation(0.1f, SAT_Loop, 0, 9, "barryWalkRight");
@@ -42,12 +44,13 @@ void BarryActor::MoveRight()
 void BarryActor::MoveLeft()
 {
 	m_position = m_Actor->GetPosition();
-	if(roomTest->getMyNode(m_position)!=NO_NODE)
+	m_myNode = roomTest->getMyNode(m_position);
+	if(m_myNode!=NO_NODE)
 	{
 		ScaleBarry(roomTest->getMyLayer(m_position));
 
 		m_goTo = roomTest->getNextNodeLeft(m_position);
-		m_Actor->MoveTo(m_goTo, 3.0f, true);
+		m_Actor->MoveTo(m_goTo, CalcWalkTime(), true);
 
 		m_Actor->LoadSpriteFrames("res/barryWalk/barryWalkLeft_001.png");
 		m_Actor->PlaySpriteAnimation(0.1f, SAT_Loop, 0, 9, "barryWalkLeft");
@@ -57,12 +60,13 @@ void BarryActor::MoveLeft()
 void BarryActor::MoveDown()
 {
 	m_position = m_Actor->GetPosition();
-	if(roomTest->getMyNode(m_position)!=NO_NODE)
+	m_myNode = roomTest->getMyNode(m_position);
+	if(m_myNode!=NO_NODE)
 	{
 		ScaleBarry(roomTest->getMyLayer(m_position));
 
 		m_goTo = roomTest->getNextNodeDown(m_position);
-		m_Actor->MoveTo(m_goTo, 3.0f, true);
+		m_Actor->MoveTo(m_goTo, CalcWalkTime(), true);
 
 		m_Actor->LoadSpriteFrames("res/barryWalk/barryWalkLeft_001.png");
 		m_Actor->PlaySpriteAnimation(0.1f, SAT_Loop, 0, 9, "barryWalkLeft");
@@ -72,12 +76,13 @@ void BarryActor::MoveDown()
 void BarryActor::MoveUp()
 {
 	m_position = m_Actor->GetPosition();
-	if(roomTest->getMyNode(m_position)!=NO_NODE)
+	m_myNode = roomTest->getMyNode(m_position);
+	if(m_myNode!=NO_NODE)
 	{
 		ScaleBarry(roomTest->getMyLayer(m_position));
 
 		m_goTo = roomTest->getNextNodeUp(m_position);
-		m_Actor->MoveTo(m_goTo, 3.0f, true);
+		m_Actor->MoveTo(m_goTo, CalcWalkTime(), true);
 
 		m_Actor->LoadSpriteFrames("res/barryWalk/barryWalkRight_001.png");
 		m_Actor->PlaySpriteAnimation(0.1f, SAT_Loop, 0, 9, "barryWalkRight");
@@ -97,3 +102,7 @@ void BarryActor::ScaleBarry(int layer)
 	m_Actor->ChangeSizeTo((float)layer,3.0f);
 }
 	
+float BarryActor::CalcWalkTime()
+{
+	return ((sqrt(pow(m_goTo.X-m_position.X,2)+pow(m_goTo.Y-m_position.Y,2)))*0.25f);
+}

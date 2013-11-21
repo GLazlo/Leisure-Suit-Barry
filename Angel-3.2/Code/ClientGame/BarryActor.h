@@ -17,6 +17,8 @@ private:
 	TreatmentRoom* roomTest;
 	Vector2 m_goTo;
 	Vector2 m_position;
+	int m_myNode;
 	void ScaleBarry(int);
+	float CalcWalkTime();
 
 };

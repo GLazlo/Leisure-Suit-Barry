@@ -1,6 +1,25 @@
 #include "stdafx.h"
 #include "MyGameManager.h"
 
+/*** Help class to find nodes ***/
+class Mouse : public MouseListener
+{
+public:
+	Mouse()
+	{
+		i=1;
+	}
+	void MouseDownEvent(Vec2i screenCoordinates, MouseButtonInput button)
+	{
+		Vector2 worldC;
+		worldC = MathUtil::ScreenToWorld(screenCoordinates.X, screenCoordinates.Y);
+		std::cout << "cord" << i << ": " << worldC.X << " " << worldC.Y << std::endl;
+		i++;
+	}
+private:
+	unsigned int i;
+};
+
 MyGameManager* MyGameManager::m_MyGameManager = NULL;
 
 MyGameManager::MyGameManager()
@@ -12,20 +31,9 @@ MyGameManager::MyGameManager()
 	theWorld.Add(Background);
 
 	Barry = new BarryActor();
+
+	Mouse* myMouse = new Mouse();
 	
-
-	m_obstacle = new Actor();
-
-	theWorld.Add(m_obstacle);
-
-	m_obstacle->SetColor(1,1,1,1);
-	m_obstacle->SetSize(5.0f);
-	m_obstacle->SetDrawShape(ADS_Circle);
-	m_obstacle->SetPosition(7.0f, 0.0f);
-
-	m_obstacle->SetSprite("collision.png");
-
-	m_obstacle->SetLayer(3);
 }
 
 MyGameManager& MyGameManager::GetInstance()
@@ -50,4 +58,8 @@ void MyGameManager::Update(float dt)
 		Barry->MoveDown();
 	else
 		Barry->MoveStop();
+
+	
 }
+
+
