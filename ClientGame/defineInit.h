@@ -1,0 +1,6 @@
+#define MAX_NODELIST 30
+#define NO_NODE -1
+#define CONSOLE 999
+#define CONSOLETEXT 1000
+#define TEXTLENGTH 62
+#define COMMANDNUMBER 20
