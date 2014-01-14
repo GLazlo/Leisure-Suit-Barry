@@ -1,5 +1,25 @@
-﻿Build started 2013.12.12. 17:36:17.
+﻿Build started 2014.01.14. 13:01:55.
+     1>Project "D:\Suli\FH Wien\5.Semester\Game Development\Angel-3.2\Code\ClientGame\ClientGame.vcxproj" on node 2 (Build target(s)).
+     1>PreBuildEvent:
+         xcopy ..\Angel\Scripting\EngineScripts\* Resources\Scripts /y /e > nul
+         
+         cd ..\Tools\BuildScripts
+         ..\..\Angel\Libraries\lua-5.2.1\Debug\lua.exe swig_wrap.lua -p "D:\Suli\FH Wien\5.Semester\Game Development\Angel-3.2\Code\
+         
+         :VCEnd
+         Interface files are up to date.
+       Link:
+         ClientGame.vcxproj -> D:\Suli\FH Wien\5.Semester\Game Development\Angel-3.2\Code\ClientGame\Debug\ClientGame.exe
+       PostBuildEvent:
+         copy ..\Angel\Libraries\DevIL-SDK-1.7.8\win\lib\DevIL.dll . /y > nul
+         copy ..\Angel\Libraries\DevIL-SDK-1.7.8\win\lib\ILU.dll . /y > nul
+         copy ..\Angel\Libraries\DevIL-SDK-1.7.8\win\lib\ILUT.dll . /y > nul
+         xcopy ..\Angel\Libraries\FMOD\*.dll . /y > nul
+         copy ..\Angel\Libraries\openal-soft-1.15-bin\Win32\soft_oal.dll .\OpenAL32.dll /y > nul
+         
+         :VCEnd
+     1>Done Building Project "D:\Suli\FH Wien\5.Semester\Game Development\Angel-3.2\Code\ClientGame\ClientGame.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:02.86
+Time Elapsed 00:00:02.47

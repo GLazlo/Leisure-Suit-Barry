@@ -3,4 +3,10 @@
 #define CONSOLE 999
 #define CONSOLETEXT 1000
 #define TEXTLENGTH 62
-#define COMMANDNUMBER 20
+#define COMMANDNUMBER 6
+#define COMMANDALTS 23
+#define MAX_OBJECTS 100
+//Implemented Number of Objects
+#define OBJECTSTREATMENT 2
+#define COMMANDSTREATMENT 2
+

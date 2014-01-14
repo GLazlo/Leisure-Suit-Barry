@@ -93,6 +93,8 @@ void MyGameManager::Subscribe()
 	theSwitchboard.SubscribeTo(this,"RX");
 	theSwitchboard.SubscribeTo(this,"RY");
 	theSwitchboard.SubscribeTo(this,"RZ");
+	theSwitchboard.SubscribeTo(this,"RBACKSPACE");
+	theSwitchboard.SubscribeTo(this,"RDELETE");
 	theSwitchboard.SubscribeTo(this,"RSPACE");
 	theSwitchboard.SubscribeTo(this,"RENTER");
 }
@@ -204,13 +206,21 @@ void MyGameManager::ReceiveMessage(Message *message)
 	{
 		m_input->AddChar(GLFW_KEY_Z);
 	}
+	else if(message->GetMessageName() == "RBACKSPACE")
+	{
+		m_input->RemoveChar();
+	}
+	else if(message->GetMessageName() == "RDELETE")
+	{
+		m_input->ClearAll();
+	}
 	else if(message->GetMessageName() == "RSPACE")
 	{
 		m_input->AddChar(GLFW_KEY_SPACE);
 	}
 	else if(message->GetMessageName() == "RENTER")
 	{
-		m_comm->Speak(m_input->Execute(m_Barry->GetMyNode()),Color(0.0f,0.0f,1.0f));		
+		m_comm->Speak(m_input->Execute(m_Barry->GetMyNode(),m_Barry->GetRoom()),Color(0.0f,0.0f,1.0f));		
 	}
 }
 

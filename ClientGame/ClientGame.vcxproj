@@ -179,6 +179,7 @@ cd ..\Tools\BuildScripts\
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="CommText.cpp" />
     <ClCompile Include="Interpreter.cpp" />
+    <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="MyGameManager.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -198,6 +199,7 @@ cd ..\Tools\BuildScripts\
     <ClInclude Include="CommText.h" />
     <ClInclude Include="defineInit.h" />
     <ClInclude Include="Interpreter.h" />
+    <ClInclude Include="Inventory.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="MyGameManager.h" />
     <ClInclude Include="platforms\win\resource.h" />

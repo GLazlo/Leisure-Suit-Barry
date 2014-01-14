@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "BarryActor.h"
-
 #include <math.h>
 
 
@@ -21,7 +20,8 @@ BarryActor::BarryActor()
 
 	m_Actor->SetLayer(6);
 
-	roomTest = new TreatmentRoom();
+	m_treatment = new TreatmentRoom();
+	roomTest = m_treatment;
 }
 
 void BarryActor::MoveRight()
@@ -120,4 +120,15 @@ int BarryActor::GetMyNode()
 		return m_myNode;
 	}
 	return NO_NODE;
+}
+
+Room* BarryActor::GetRoom()
+{
+	return roomTest;
+}
+String BarryActor::GetInv()
+{
+	String inv = "";
+	inv += m_treatment->getInvRoom();
+	return inv;
 }

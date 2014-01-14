@@ -63,6 +63,9 @@
     <ClCompile Include="Interpreter.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="platforms\win\ClientGame.rc">
@@ -104,6 +107,9 @@
       <Filter>header</Filter>
     </ClInclude>
     <ClInclude Include="Interpreter.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
       <Filter>header</Filter>
     </ClInclude>
   </ItemGroup>

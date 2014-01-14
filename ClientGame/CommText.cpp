@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "CommText.h"
-#include "defineInit.h";
+#include "defineInit.h"
 
 CommText::CommText()
 {

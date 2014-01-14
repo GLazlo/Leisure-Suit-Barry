@@ -1,6 +1,10 @@
 #include "stdafx.h"
-#include "TextInput.h";
-#include "defineInit.h";
+#include "TextInput.h"
+#include "defineInit.h"
+#include "MyGameManager.h"
+
+#include <iostream>
+#define quote(x) #x
 
 TextInput::TextInput()
 	:m_command(""),m_order(""),m_object(""),m_secObject("")
@@ -18,6 +22,7 @@ TextInput::TextInput()
 	m_consoleBack->SetSize(20.0f,0.8f);
 	m_consoleBack->SetLayer(CONSOLE);
 	theWorld.Add(m_consoleBack);
+	m_commandList = new Command();
 }
 void TextInput::AddChar(int c)
 {
@@ -34,14 +39,25 @@ void TextInput::AddChar(int c)
 	}
    
 }
-String TextInput::Execute(int node)
+String TextInput::Execute(int node, Room* room)
 {
 	Parse();
 	m_command = "";
+	String myTempRoom = room->getMyClass();
 	if(strcmp(m_secObject.c_str(),"") == 0)
 	{
 		Update();
-		return m_interpreter.Process(m_order,m_object,"TreatmentRoom",node);
+		m_order = m_commandList->GetComm(m_order);
+		if(strcmp(m_order.c_str(), "INV") == 0)
+		{
+			MyGameManager m = theGame;
+			
+			return m.m_Barry->GetInv();
+		}
+		else
+		{
+			return m_interpreter.Process(m_order,m_object,myTempRoom,node,room);
+		}
 	}
 	else
 	{
@@ -55,7 +71,7 @@ void TextInput::Parse()
 {
 	if(m_command != "")
 	{
-		int i;
+		unsigned int i;
 		int word = 0;
 		m_order = "";
 		m_object = "";
@@ -91,4 +107,19 @@ void TextInput::Parse()
 void TextInput::Update()
 {
 	m_TextActor->SetDisplayString(m_command);
+}
+
+void TextInput::RemoveChar()
+{
+	if(m_command.size() >= 1)
+	{
+		m_command.pop_back();
+		Update();
+	}
+}
+
+void TextInput::ClearAll()
+{
+	m_command.clear();
+	Update();
 }
